@@ -33,10 +33,22 @@ var Heap = function(min) {
 };
 
 Heap.init = function(obj, key) {
-  obj._parent = null;
-  obj._left = null;
-  obj._right = null;
-  obj._key = key;
+  Object.defineProperty(obj, '_parent', {
+    value: null,
+    writable: true
+  });
+  Object.defineProperty(obj, '_left', {
+    value: null,
+    writable: true
+  });
+  Object.defineProperty(obj, '_right', {
+    value: null,
+    writable: true
+  });
+  Object.defineProperty(obj, '_key', {
+    value: key,
+    writable: true
+  });
   return obj;
 };
 
@@ -64,11 +76,14 @@ Heap.prototype.insert = function(obj, key) {
     insert = this._last();
 
     node._parent = insert;
-
-    if (!insert._left)
-      insert._left = node;
-    else
-      insert._right = node;
+	
+	if (insert) {
+		if (!insert._left) {
+		  insert._left = node;
+		} else {
+		  insert._right = node;
+		}
+	}
 
     this._up(node);
   }
@@ -171,10 +186,13 @@ Heap.prototype._last = function() {
 
   while (path.length > 1) {
     pos = path.pop();
-    if (pos === 0)
-      insert = insert._left;
-    else
-      insert = insert._right;
+	if (insert) {
+		if (pos === 0) {
+		  insert = insert._left;
+		} else {
+		  insert = insert._right;
+		}
+	}
   }
 
   return insert;
