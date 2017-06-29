@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/tjfontaine/node-binaryheap.git"
+    "url": "http://github.com/stephica/node-binaryheap.git"
   },
   "main": "binaryheap.js",
   "engines": {
